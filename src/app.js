@@ -43,6 +43,7 @@ App = {
   },
   loadAccount: async () => {
     App.account = web3.eth.accounts[0]
+    web3.eth.defaultAccount = web3.eth.accounts[0]
     },
     loadContract: async () => {
         // Create a JavaScript version of the smart contract
@@ -104,6 +105,13 @@ App = {
     }
 
     },
+    createTask: async () => {
+      App.setLoading(true)
+      const content = $('#newTask').val()
+      await App.todoList.createTask(content)
+      window.location.reload()
+    },
+
     setLoading: (boolean) => {
         App.loading = boolean
         const loader = $('#loader')
